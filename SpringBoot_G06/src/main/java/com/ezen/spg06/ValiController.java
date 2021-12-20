@@ -28,7 +28,7 @@ public class ValiController {
 		//같이 전달됩니다. model.addAttribute("dto", contentdto); 와 동일한 동작
 		
 		//전달된 파라미터가 비어있거나 널이라면, 그 값을 갖고 원래의 페이지로 돌아가고,
-		//유효한 데이터라면 DonePage.jsp로 전송됩니다
+		//유효한 데이터라면 DonePage.jsp로 전송됨
 		if(true) {
 			model.addAttribute("message", "writer 또는 content를 입력하세요");
 			return "startPage";
