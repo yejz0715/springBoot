@@ -24,8 +24,8 @@ public class ValiController {
 		//추가로 contentdto라는 이름으로 객체가 model객체에 추가되서 최종 jsp파일에 전달됩니다
 		
 		//매개변수 객체(매개변수)앞에 ModelAttrivute(전달이름)을 붙이면,
-		//return되는 페이지에 해당 객체가 .model.addAttribute로 넣은것처럼
-		//같이 전달됩니다. model.addAttribute("dto", contentdto); 와 동일한 동작
+		//return되는 페이지에 해당 객체가 .model.addAttribute로 넣은것처럼 같이 전달됩니다. 
+		//model.addAttribute("dto", contentdto); 와 동일한 동작
 		
 		//전달된 파라미터가 비어있거나 널이라면, 그 값을 갖고 원래의 페이지로 돌아가고,
 		//유효한 데이터라면 DonePage.jsp로 전송됨..
