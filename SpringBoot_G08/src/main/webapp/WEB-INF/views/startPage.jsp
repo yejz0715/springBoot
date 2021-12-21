@@ -10,7 +10,7 @@
 작성자 : <input type="text" name="writer" value="${dto.writer }"> <br /> <!-- 첫페이지 value값은 비어있음 -->
 내용 : <input type="text" name="content" value="${dto.content }"> <br />
 <input type="submit" value="전송" /><br />
-${message }
+${msg }
 </form>
 </body>
 </html>
