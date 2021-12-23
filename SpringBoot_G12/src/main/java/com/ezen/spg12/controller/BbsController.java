@@ -69,9 +69,9 @@ public class BbsController {
 				if(result.getFieldError("writer")!=null)
 					model.addAttribute("msg", "작성자 입력 오류 ");
 				else if(result.getFieldError("title")!=null)
-					model.addAttribute("msg", "작성자 입력 오류 ");
+					model.addAttribute("msg", "제목 입력 오류 ");
 				else if(result.getFieldError("content")!=null)
-					model.addAttribute("msg", "작성자 입력 오류 ");
+					model.addAttribute("msg", "내용 입력 오류 ");
 		return "updateForm";
 		}else {
 	   	bdao.update(bbsdto);

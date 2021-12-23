@@ -1,6 +1,5 @@
 package com.ezen.spg15.service;
 
-import org.apache.ibatis.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
@@ -24,28 +23,30 @@ public class MyService {
 	
 	@Autowired
 	ITransactionDao3 td3;
-
+	
 	@Autowired
 	TransactionTemplate tt;
-	
-	@Transactional(propagation=Propagation.REQUIRES_NEW) //현재작업은 독립실행
-	public int buy(String id, int amount, String error) {
-		try {
-			tt.execute(new TransactionCallbackWithoutResult() {
 
+	//@Transactional(propagation=Propagation.REQUIRED) 관련 작업 모두 취소
+	@Transactional(propagation=Propagation.REQUIRES_NEW) // 현재 작업은 독립실행
+	public int buy(String id, int amount, String error) {
+		
+		try {
+			tt.execute( new TransactionCallbackWithoutResult() {
 				@Override
 				protected void doInTransactionWithoutResult(TransactionStatus status) {
 					td1.buy(id, amount);
-					if(error.equals("1")) {int n=10/0;} 
+					if( error.equals("1") ) {  int n = 10 / 0;		}
 					td2.buy(id, amount);
 					System.out.println("Transaction #1 Commit");
-				}				
+				} 
 			});
 			return 1;
 		}catch(Exception e) {
-			System.out.println("Transaction #1 RollBack"); 
-			return 0; 
+			System.out.println("Transaction #1 RollBack");
+			return 0;
 		}
-		
 	}
+	
+	
 }

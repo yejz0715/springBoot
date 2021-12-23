@@ -3,6 +3,7 @@ package com.ezen.spg15.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.ui.Model;
@@ -25,33 +26,30 @@ public class MyController {
 	TransactionTemplate tt;
 	
 	@RequestMapping("/")
-	public String root() {
-		return "buy_ticket";
-	}
+    public String root() {
+        return "buy_ticket";
+    }
 	
-	@RequestMapping("/butTicketCard")
-	public String buy_ticket_card(@RequestParam("id") String id,
-			@RequestParam("amount")int amount, @RequestParam("error")String error,
-			Model model) {
-		
-			model.addAttribute("id", id);
-			model.addAttribute("amount", amount);
-			
-			try {
-				tt.execute(new TransactionCallbackWithoutResult() {
-
-					@Override
-					protected void doInTransactionWithoutResult(TransactionStatus status) {
-						int result=ms.buy(id, amount, error);
-						if(error.equals("2")) {int n=10/0;}
-						td3.buy(id, amount);
-						System.out.println("Transaction #2 Commit");
-					}				
-				});
-				return "buy_ticket_end";
-			}catch(Exception e) {
-				System.out.println("Transaction #2 RollBack"); 
-				return "buy_ticket_error";		
-	   }
-	}
+	@RequestMapping("/buyTicketCard")
+	public String buy_ticket_card( @RequestParam("id") String id,
+	@RequestParam("amount") int amount, @RequestParam("error") String error,
+	Model model) {
+		model.addAttribute("id", id);
+		model.addAttribute("amount", amount);
+		try {
+			tt.execute(new TransactionCallbackWithoutResult() {
+				@Override
+				protected void doInTransactionWithoutResult(TransactionStatus status) {
+					int result = ms.buy(id, amount, error);
+					if (error.equals("2")) { int n = 10 / 0;}
+					td3.buy(id, amount);
+					System.out.println("Transaction #2 Commit");
+				}
+			});
+			return "buy_ticket_end";
+		} catch(Exception e) {
+			System.out.println("Transaction #2 Rollback");
+			return "buy_ticket_error";
+		}
+	}//0-3/1-0/2-1,2
 }
