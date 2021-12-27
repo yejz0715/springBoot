@@ -23,4 +23,56 @@ function open_win(url, name) {
 
 
 
+function boardCheck(){
+	if( document.frm.pass.value==''){
+		document.getElementById('message').innerHTML = '비밀번호는 게시물 수정 삭제시 필요합니다';
+		return false;
+	}
+	if( document.frm.title.value==''){
+		document.getElementById('message').innerHTML = '제목은 필수입니다';
+		return false;
+	}
+	if( document.frm.content.value==''){
+		document.getElementById('message').innerHTML = '게시물 내용을 비워둘수 없습니다.';
+		return false;
+	}
+	return true;
+}
+
+
+
+
+function reply_check(){
+	if(document.frm2.reply.value.length==0){
+		alert("댓글을 입력해주세요");
+		frm2.reply.focus();
+		return false;
+	}else{
+		return true;
+	}
+}
+
+
+function open_win(url, name) {
+	window.open(url, name, "toolbar=no, menubar=no, scrollbars=no, "
+				+ " resizable=no, width=500, height=230");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

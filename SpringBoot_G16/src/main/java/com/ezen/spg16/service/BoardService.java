@@ -1,6 +1,9 @@
 package com.ezen.spg16.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import com.ezen.spg16.dao.IBoardDao;
 import com.ezen.spg16.dto.BoardVO;
 import com.ezen.spg16.dto.Paging;
+import com.ezen.spg16.dto.ReplyVO;
 
 @Service
 public class BoardService {
@@ -35,4 +39,45 @@ public class BoardService {
 	public int getAllCount() {
 		return bdao.getAllCount();
 	}
+
+	public void insertBoard(BoardVO bdto) {
+		bdao.insertBoard(bdto);
+		
+	}
+
+	public BoardVO boardView(int num) {
+		bdao.plusReadCount(num);
+		return bdao.getBoard(num);
+	}
+
+	public ArrayList<ReplyVO> selectReply(int num) {
+		return bdao.selectReply(num);
+	}
+
+	public void addReply(ReplyVO rvo) {
+		bdao.addReply(rvo);		
+	}
+
+	public BoardVO getBoard(int num) {
+		return bdao.getBoard(num);
+	}
+
+	public void deleteReply(int num) {
+		bdao.deleteReply(num);
+		
+	}
+
+	public void updateBoard( BoardVO boardvo) {
+		bdao.updateBoard(boardvo);
+		
+	}
 }
+
+
+
+
+
+
+
+
+

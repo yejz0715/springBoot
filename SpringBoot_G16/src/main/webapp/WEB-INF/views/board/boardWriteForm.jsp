@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/board.css" >
+<script src="static/script/board.js"></script>
 </head>
 <body>
 <div id="wrap" align="center">
@@ -22,12 +23,13 @@
 		<tr><th>제목</th><td><input type="text" size="70" name="title" value="${dto.title}"> * 필수</td></tr>
 		<tr><th>내용</th><td><textarea cols="70" rows="15" name="content" >${dto.content}</textarea>
 			</td></tr>
+		<tr><th>이미지</th><td><input type="file" name="image" /></td></tr>
 	</table><br>	<br>
-	<input type="submit" value="등록" > 
+	<input type="submit" value="등록" onClick="return boardCheck()"> 
 	<input type="reset" 	value="다시 작성"> 
 	<input type="button" value="목록" onclick="location.href='main'">
-	</form>
-	${message}
+	</form><br>
+	<div id="message"></div>
 </div>
 </body>
 </html>

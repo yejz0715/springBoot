@@ -8,11 +8,9 @@ import lombok.Data;
 public class BoardVO {
 	
 	private int num;
-	@NotEmpty(message="아이디를 입력하세요")
 	private String userid;
 	@NotEmpty(message="비밀번호를 입력하세요(게시글 수정 삭제시 필요합니다)")
 	private String pass;
-	@NotEmpty(message="이메일을 입력하세요")
 	private String email;
 	@NotEmpty(message="제목을 입력하세요")
 	private String title;
@@ -21,5 +19,6 @@ public class BoardVO {
 	private int readcount;
 	private Timestamp writedate;
 	private int replycnt;
+	private String imgfilename;
 	
 }
