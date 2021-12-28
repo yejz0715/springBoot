@@ -277,6 +277,23 @@ public class BoardController {
 		return "board/boardEditForm";
 	}
 	
+	
+	@RequestMapping("boardDeleteForm")
+	public String board_delete_form(@RequestParam("num") int num,
+			Model model, HttpServletRequest request) {		
+		model.addAttribute("num", num);
+		return "board/boardCheckPassForm";
+	}
+	
+	@RequestMapping("boardDelete")
+	public String board_delete(Model model, HttpServletRequest request) {		
+		int num=Integer.parseInt(request.getParameter("num"));	
+			
+		//bdao.deleteBoard(num);
+		//bdao.deleteReply(num);
+		bs.removeBoard(num);
+		return "redirect:/main";
+	}
 }
 
 

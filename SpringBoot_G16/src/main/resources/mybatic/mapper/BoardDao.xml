@@ -57,6 +57,16 @@
 		update board set pass=#{pass}, email=#{email}, title=#{title}, content=#{content}, 
 			imgfilename=#{imgfilename}  		where num=#{num}
 	</update>
+	
+	
+	
+	<delete id="deleteBoard" >
+	delete form board where num=#{param1}
+	</delete>
+	
+	<delete id="deleteReplyAll" >
+	delete form reply where boardnum=#{param1}
+	</delete>
 </mapper>
 
 

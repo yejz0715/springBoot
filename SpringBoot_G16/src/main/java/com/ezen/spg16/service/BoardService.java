@@ -71,6 +71,12 @@ public class BoardService {
 		bdao.updateBoard(boardvo);
 		
 	}
+
+	public void removeBoard(int num) {
+		bdao.deleteBoard(num);
+		bdao.deleteReplyAll(num);
+		
+	}
 }
 
 
