@@ -96,39 +96,74 @@ function go_mod_save(){
 	}
 }
 
+
+
+
+
 function go_search_order(){
 	if( document.frm.key.value=="") return;
-	document.frm.action = "orderList?page=1";
+	document.frm.action = "adminOrderList?page=1";
 	document.frm.submit();
 }
-
-
 
 function go_total_order(){
 	document.frm.key.value="";
-	document.frm.action = "orderList?page=1";
+	document.frm.action = "adminOrderList?page=1";
 	document.frm.submit();
 }
+
+
 
 function go_order_save(){
+	var count=0;
+	
+	if(document.frm.result.length==undefined){
+		if( document.frm.result.checked == true ) count++;
+	} else {
+		for(var i=0; i<document.frm.result.length; i++){
+			if( document.frm.result[i].checked == true ) count++;
+		}
+	}
+	if( count == 0) {
+		alert("삭제할 항목을 선택해 주세요.");
+	}else{
+		document.frm.action = "orderUpdateResult";
+		document.frm.submit();
+	}
 }
 
-function go_search_order(){
+
+
+
+
+
+function go_search_qna(){
 	if( document.frm.key.value=="") return;
-	var url="adminQnamList&page=1";
+	var url = "adminQnaList&page=1";
 	document.frm.action = url;
-	document.frm.submit();
+    document.frm.submit();
 }
-
-
-
-function go_total_order(){
+function go_total_qna(){
 	document.frm.key.value="";
-	document.frm.action = "adminQnamList&page=1";
+	document.frm.action = "adminQnaList&page=1";
 	document.frm.submit();
 }
 
-function go_re(qseq){
-	document.frm.action = "adminQnaRepsave";
+
+function go_rep(qseq){
+	document.frm.action="adminQnaRepsave";
 	document.frm.submit();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
