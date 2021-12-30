@@ -6,7 +6,17 @@
     
  <mapper namespace="com.ezen.spn01.dao.IQnaDao">
  
- <select id="listQna" resultType="com.ezen.spn01.dto.IQnaVO">
- 		select * from qna where id=#{param1} order by qseq desc
- </select>
+ 	<select id="listQna" resultType="com.ezen.spn01.dto.QnaVO">
+		select * from qna where id=#{param1} order by qseq desc
+	</select>
+	
+	<insert id="insertQna" parameterType="com.ezen.spn01.dto.QnaVO">
+		insert into qna (qseq, subject, content, id) 
+		values(qna_seq.nextval, #{subject}, #{content}, #{id} )
+	</insert>
+	
+	<select id="getQna" resultType="com.ezen.spn01.dto.QnaVO">
+		select * from qna where qseq=#{param1}
+	</select>
+	
  </mapper>

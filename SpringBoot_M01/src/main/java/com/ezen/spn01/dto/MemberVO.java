@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class MemberVO {
 
-	@NotNull(message="id를 입력하세요")
+	@NotNull (message="id를 입력하세요")
 	@NotEmpty(message="id를 입력하세요")
 	private String id;
 	@NotNull(message="비밀번호를 입력하세요")

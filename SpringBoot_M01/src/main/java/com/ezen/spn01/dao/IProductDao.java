@@ -14,5 +14,4 @@ public interface IProductDao {
 	ArrayList<ProductVO> getKindList(String kind);
 	ProductVO getProduct(int pseq);
 
-
 }

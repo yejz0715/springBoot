@@ -28,7 +28,6 @@ public class ProductService {
 
 	public ProductVO getProduct(int pseq) {
 		return pdao.getProduct(pseq);
-	
 	}
 	
 }

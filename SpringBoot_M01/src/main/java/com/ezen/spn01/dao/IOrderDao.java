@@ -11,20 +11,12 @@ import com.ezen.spn01.dto.OrderVO;
 @Mapper
 public interface IOrderDao {
 
-	void insertOrders(String id);
-
+	void insertOders(String id);
 	int LookupMaxOseq();
-	
-	void insertOrderDetail(CartVO cvo, int oseq);
-
+	void insertOderDetail(CartVO cvo, int oseq);
 	void deleteCart(Integer cseq);
-
 	ArrayList<OrderVO> listOrderByOseq(int oseq);
-
 	ArrayList<Integer> selectOseqOrderIng(String id);
-
 	ArrayList<Integer> oseqListAll(String id);
-
-	
 
 }

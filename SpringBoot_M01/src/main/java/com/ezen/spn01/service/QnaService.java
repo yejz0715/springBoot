@@ -17,11 +17,15 @@ public class QnaService {
 	IQnaDao qdao;
 
 	public ArrayList<QnaVO> listQna(String id) {
-		return qdao.listQna(id) ;
+		return qdao.listQna(id);
 	}
 
-	public void insertQna(@Valid QnaVO qnavo) {
-	       qdao.insertQna(qnavo);
+	public void insertQna(QnaVO qnavo) {
+		qdao.insertQna(qnavo);
 		
+	}
+
+	public QnaVO getQna(int qseq) {
+		return qdao.getQna(qseq);
 	}
 }

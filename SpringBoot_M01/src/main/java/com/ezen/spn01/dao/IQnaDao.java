@@ -2,8 +2,6 @@ package com.ezen.spn01.dao;
 
 import java.util.ArrayList;
 
-import javax.validation.Valid;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ezen.spn01.dto.QnaVO;
@@ -12,7 +10,7 @@ import com.ezen.spn01.dto.QnaVO;
 public interface IQnaDao {
 
 	ArrayList<QnaVO> listQna(String id);
-
-	void insertQna(@Valid QnaVO qnavo);
+	void insertQna(QnaVO qnavo);
+	QnaVO getQna(int qseq);
 
 }

@@ -117,40 +117,39 @@ public class MemberController {
 			@RequestParam(value="reid", required=false) String reid, 
 			@RequestParam(value="pwdCheck", required=false) String pwdCheck) {
 		
+		model.addAttribute("reid", reid);
+		
 		if( result.getFieldError("id")!=null) {
 			model.addAttribute("message", result.getFieldError("id").getDefaultMessage());
-			model.addAttribute("reid", reid);
 			return "member/joinForm";
 		} else if( result.getFieldError("pwd")!=null) {
 			model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
-			model.addAttribute("reid", reid);
 			return "member/joinForm";
-		}else if( result.getFieldError("name")!=null) {
+		}else if( result.getFieldError("name") != null) {
 			model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
-			model.addAttribute("reid", reid);
 			return "member/joinForm";
 		}else if( result.getFieldError("email")!=null) {
 			model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
-			model.addAttribute("reid", reid);
 			return "member/joinForm";
-		} else if( reid == null || (reid!=null && !reid.equals(membervo.getId()) ) ) {
+		} else if( reid == null || (   reid != null && !reid.equals(membervo.getId())  )  ) {
 			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다");
-			model.addAttribute("reid", reid);
 			return "member/joinForm";
-		} else if( pwdCheck == null || (pwdCheck!=null && !pwdCheck.equals(membervo.getPwd()) ) ) {
+		} else if( pwdCheck == null || (  pwdCheck != null && !pwdCheck.equals(membervo.getPwd())  )  ) {
 			model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
-			model.addAttribute("reid", reid);
 			return "member/joinForm";
-		}
+		} 
 		membervo.setAddress(request.getParameter("addr1") + " " + request.getParameter("addr2"));
 		ms.insertMember(membervo);
-		model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
+		model.addAttribute("message", "회원가입이 완료되었어요. 로그인하세요");
 		return "member/login";
 	}
 	
-	@RequestMapping(value ="memberEditForm ")
-		public ModelAndView memberEditForm(HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView();
+	
+	
+	
+	@RequestMapping(value = "memberEditForm")
+	public ModelAndView memberEditForm( HttpServletRequest request ) {
+		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
 		
@@ -162,7 +161,6 @@ public class MemberController {
 		String addr1 = addr.substring(0, k3); // 맨앞부터 세번째 공백 위치 바로 전까지... 주소 앞부분
 		String addr2 = addr.substring(k3+1);  // 세번째 공백 뒷글자부터 맨끝까지...주소 뒷부분
 		
-	
 		mav.addObject("dto", mvo);
 		mav.addObject("addr1", addr1);
 		mav.addObject("addr2", addr2);
@@ -170,34 +168,40 @@ public class MemberController {
 		return mav;
 	}
 	
-
-	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST)
-	public String memberUpdate( @ModelAttribute("dto") @Valid MemberVO membervo , 
+	
+	
+	@RequestMapping(value = "memberUpdate",  method=RequestMethod.POST)
+	public String memberUpdate(@ModelAttribute("dto") @Valid MemberVO membervo,
 			BindingResult result, Model model, HttpServletRequest request) {
 		
 		request.setAttribute("addr1", request.getParameter("addr1"));
 		request.setAttribute("addr2", request.getParameter("addr2"));
-		String pwdCheck=request.getParameter("pwdCheck");
+		String pwdCheck = request.getParameter("pwdCheck");
 		
-	    if( result.getFieldError("pwd")!=null) {
-		request.setAttribute("message", result.getFieldError("pwd").getDefaultMessage());
-		return "member/memberUpdateForm";
-	}else if( result.getFieldError("name")!=null) {
-		request.setAttribute("message", result.getFieldError("name").getDefaultMessage());
-		return "member/memberUpdateForm";
-	}else if( result.getFieldError("email")!=null) {
-		request.setAttribute("message", result.getFieldError("email").getDefaultMessage());
-		return "member/memberUpdateForm";
-	}else {
-		membervo.setAddress(request.getParameter("addr1") + ""
-				+request.getParameter("addr2"));
-		ms.updateMember(membervo);
-		HttpSession session=request.getSession();
-	    session.setAttribute("loginUser", membervo);
-		return "redirect:/";
+		if( result.getFieldError("pwd")!=null) {
+			request.setAttribute("message", result.getFieldError("pwd").getDefaultMessage());
+			return "member/memberUpdateForm";
+		}else if( result.getFieldError("name")!=null) {
+			request.setAttribute("message", result.getFieldError("name").getDefaultMessage());
+			return "member/memberUpdateForm";
+		}else if( result.getFieldError("email")!=null) {
+			request.setAttribute("message", result.getFieldError("email").getDefaultMessage());
+			return "member/memberUpdateForm";
+		}else if( pwdCheck != null && ( !pwdCheck.equals( membervo.getPwd() ) ) ) {
+			request.setAttribute("message", "비밀번호 확인 일치하지 않습니다");
+			return "member/memberUpdateForm";
+		}else {
+			membervo.setAddress(request.getParameter("addr1") + " " + request.getParameter("addr2"));
+			ms.updateMember(membervo);
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", membervo);
+			return "redirect:/";
+		}
+		
 	}
+	
 }
-}
+
 
 
 
