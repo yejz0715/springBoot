@@ -118,7 +118,7 @@ public class AdminController {
 			
 			int count = as.getAllCount("product", "name", key );
 			paging.setTotalCount(count);
-			paging.paging();
+			paging.paging(); //다시 한번 불러줘야 페이지적용이 됨
 			
 			mav.addObject("productList" , as.listProduct( paging, key ));
 			mav.addObject("paging", paging);
